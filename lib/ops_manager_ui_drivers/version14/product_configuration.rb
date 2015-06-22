@@ -21,6 +21,13 @@ module OpsManagerUiDrivers
         Version14::ProductForm.new(browser: browser, product_name: product_name, form_name: form_name)
       end
 
+      def set_resource_size_value(job_resource_name, resource_name, value)
+	resource_config_form = product_form("#{product_name}-resource-sizes")
+	resource_config_form.open_form
+	product_form('product_resources_form').nested_property(job_resource_nam, "#{resource_name}][value").set(value)
+	resource_config_form.save_form
+      end
+
       private
 
       attr_reader :browser, :product_name
